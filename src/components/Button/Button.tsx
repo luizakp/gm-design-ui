@@ -1,11 +1,33 @@
+import { cva, VariantProps } from "class-variance-authority";
 import React from "react";
+import { ButtonOrLink, Props as ButtonOrLinkProps } from "../ButtonOrLink";
 
-export interface ButtonProps {
-  label: string;
+const buttonStyles = cva(
+  "flex items-center justify-center px-4 py-2 rounded font-medium focus:outline-none focus:ring-2 focus:ring-offset-white dark:focus:ring-offset-black focus:ring-offset-1 disabled:opacity-60 disabled:pointer-events-none hover:bg-opacity-80",
+  {
+    variants: {
+      intent: {
+        primary: "bg-giv-500 text-neutral-100",
+        secondary:
+          "bg-giv-900 text-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-100 focus:ring-gray-500",
+        danger: "bg-danger-500 text-white focus:ring-red-500",
+      },
+      fullWidth: {
+        true: "w-full",
+      },
+    },
+    defaultVariants: {
+      intent: "primary",
+    },
+  }
+);
+
+export interface Props
+  extends ButtonOrLinkProps,
+    VariantProps<typeof buttonStyles> {}
+
+export default function Button({ intent, fullWidth, ...props }: Props) {
+  return (
+    <ButtonOrLink className={buttonStyles({ intent, fullWidth })} {...props} />
+  );
 }
-
-const Button = (props: ButtonProps) => {
-  return <button className="text-2xl bg-gray-400">{props.label}</button>;
-};
-
-export default Button;
