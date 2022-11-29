@@ -26,7 +26,7 @@ export interface Props
   extends ButtonOrLinkProps,
     VariantProps<typeof buttonStyles> {}
 
-export default function Button({ intent, fullWidth, ...props }: Props) {
+export default function ButtonTest({ intent, fullWidth, ...props }: Props) {
   return (
     <ButtonOrLink className={buttonStyles({ intent, fullWidth })} {...props} />
   );
